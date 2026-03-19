@@ -31,7 +31,7 @@ import math
 import struct
 import time
 
-from micropython import const
+from micropython import const  
 
 
 def delay_microseconds(nusec):
@@ -48,7 +48,7 @@ try:
     from circuitpython_typing import ReadableBuffer
     from digitalio import DigitalInOut
 
-except ImportError:
+except ImportError: 
     pass
 
 __version__ = "0.0.0+auto.0"
@@ -271,7 +271,8 @@ class Adafruit_BME680:
 
     @property
     def temperature(self) -> float:
-        """The compensated temperature in degrees Celsius."""
+        """The compensated temperature in degrees Celsius.
+        """
         self._perform_reading()
         calc_temp = ((self._t_fine * 5) + 128) / 256
         return calc_temp / 100
@@ -386,7 +387,7 @@ class Adafruit_BME680:
         self._write(_BME680_REG_CTRL_MEAS, [ctrl])
         new_data = False
         start_time = time.monotonic()
-        while not new_data:
+        while (not new_data):
             data = self._read(_BME680_REG_MEAS_STATUS, 17)
             new_data = data[0] & 0x80 != 0
             time.sleep(0.005)
@@ -585,7 +586,7 @@ class Adafruit_BME680:
         return durval
 
 
-class Adafruit_BME680_I2C(Adafruit_BME680):
+class Adafruit_BME680_I2C (Adafruit_BME680):
     """Driver for I2C connected BME680.
 
     :param ~busio.I2C i2c: The I2C bus the BME680 is connected to.
